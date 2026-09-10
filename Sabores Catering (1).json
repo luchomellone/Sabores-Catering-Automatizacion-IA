@@ -1,0 +1,2153 @@
+{
+  "name": "Sabores Catering",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblokqozwCNf2XP5d",
+          "mode": "list",
+          "cachedResultName": "Clientes",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblokqozwCNf2XP5d"
+        },
+        "filterByFormula": "={{ '{Email} = \"' + $json.cliente_email + '\"' }}",
+        "options": {}
+      },
+      "id": "c3563dbf-1849-401d-956e-6c04e2debd5f",
+      "name": "Search records",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        -112
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8a5412de-641b-438f-9d29-195a119abe64",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c69ed4c9-d212-4b07-8b2c-7e615ccd0801",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1056,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblokqozwCNf2XP5d",
+          "mode": "list",
+          "cachedResultName": "Clientes",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblokqozwCNf2XP5d"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $('Gmail Trigger').item.json.from.value[0].name }}",
+            "Email": "={{ $('Gmail Trigger').item.json.from.value[0].address }}",
+            "Fecha de Alta": "={{ $today.format('YYYY-MM-DD') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Empresa",
+              "displayName": "Empresa",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de Alta",
+              "displayName": "Fecha de Alta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Consultas",
+              "displayName": "Consultas",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "85ff7d36-c0af-4e2d-a803-9445b6fc6f39",
+      "name": "Create a record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        80
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbljNS8iFgCOIWa1I",
+          "mode": "list",
+          "cachedResultName": "Servicios",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tbljNS8iFgCOIWa1I"
+        },
+        "options": {}
+      },
+      "id": "0fab3e66-3b4d-49d7-9830-46f7f57fda6e",
+      "name": "Search records1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        1440,
+        -16
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"tipo_evento\": \"Cumpleaños de 15\",\n  \"cantidad_invitados\": 50,\n  \"servicio_sugerido\": \"Catering Premium\",\n  \"precio_estimado\": 900000,\n  \"datos_faltantes\": [\"fecha del evento\"],\n  \"respuesta_sugerida\": \"Hola! Para tu evento de 50 personas te recomendamos el Catering Premium...\"\n}\n\n"
+      },
+      "id": "f9132ae8-a2d9-4747-84af-5201de57c80e",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1808,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblorC8UU5SCTIm8z",
+          "mode": "list",
+          "cachedResultName": "Consultas",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblorC8UU5SCTIm8z"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Cliente": "={{ [ $(\"Create a record\").isExecuted ? $(\"Create a record\").first().json.id : $(\"Search records\").first().json.id ] }}",
+            "Tipo de Evento": "={{ [\"Cumpleaños\", \"Evento corporativo\", \"Casamiento\", \"Evento familiar\", \"Evento Infantil\"].includes($json.output?.tipo_evento) ? $json.output.tipo_evento : \"Otro\" }}",
+            "Servicio solicitado": "={{ [ $('Search records1').first().json.id ] }}",
+            "Respuesta sugerida": "={{ $json.output.respuesta_sugerida }}",
+            "Cantidad de Invitados": "={{ $json.output.cantidad_invitados }}",
+            "Estado": "Pendiente de Aprobación",
+            "Mensaje": "={{ $('Gmail Trigger').item.json.text }}",
+            "ID Consulta": "={{ $('Merge').item.json.id_consulta }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID Consulta",
+              "displayName": "ID Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mensaje",
+              "displayName": "Mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de Consulta",
+              "displayName": "Fecha de Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Procesado por IA",
+                  "value": "Procesado por IA"
+                },
+                {
+                  "name": "Pendiente de Aprobación",
+                  "value": "Pendiente de Aprobación"
+                },
+                {
+                  "name": "Aprobado",
+                  "value": "Aprobado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                },
+                {
+                  "name": "Enviado",
+                  "value": "Enviado"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Evento",
+              "displayName": "Tipo de Evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Cumpleaños",
+                  "value": "Cumpleaños"
+                },
+                {
+                  "name": "Evento corporativo",
+                  "value": "Evento corporativo"
+                },
+                {
+                  "name": "Casamiento",
+                  "value": "Casamiento"
+                },
+                {
+                  "name": "Evento familiar",
+                  "value": "Evento familiar"
+                },
+                {
+                  "name": "Evento Infantil",
+                  "value": "Evento Infantil"
+                },
+                {
+                  "name": "Otro",
+                  "value": "Otro"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cantidad de Invitados",
+              "displayName": "Cantidad de Invitados",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha del evento",
+              "displayName": "Fecha del evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Restricciones alimentarias",
+              "displayName": "Restricciones alimentarias",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prioridad IA",
+              "displayName": "Prioridad IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alta",
+                  "value": "Alta"
+                },
+                {
+                  "name": "Media",
+                  "value": "Media"
+                },
+                {
+                  "name": "Baja",
+                  "value": "Baja"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nivel de Interés",
+              "displayName": "Nivel de Interés",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alto",
+                  "value": "Alto"
+                },
+                {
+                  "name": "Medio",
+                  "value": "Medio"
+                },
+                {
+                  "name": "Bajo",
+                  "value": "Bajo"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resumen IA",
+              "displayName": "Resumen IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Datos faltantes",
+              "displayName": "Datos faltantes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Respuesta sugerida",
+              "displayName": "Respuesta sugerida",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Error",
+              "displayName": "Error",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de procesamiento",
+              "displayName": "Fecha de procesamiento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de envio",
+              "displayName": "Fecha de envio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Servicio solicitado",
+              "displayName": "Servicio solicitado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a0e08d11-508b-4f46-845a-9e63537a2215",
+      "name": "Create a record1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2032,
+        -16
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "luciano.mellone.coderhouse@gmail.com",
+        "subject": "=[Aprobación Requerida] Presupuesto para {{ $('AI Agent').item.json.output.tipo_evento }}",
+        "message": "=Hola, se ha generado la siguiente propuesta automática:\n\n- Cliente: {{ $('Gmail Trigger').item.json.headers.from.replace('From: ', '') }}\n- Evento: {{ $('AI Agent').item.json.output.tipo_evento }}\n- Invitados: {{ $('AI Agent').item.json.output.cantidad_invitados }}\n- Servicio: {{ $('AI Agent').item.json.output.servicio_sugerido }}\n\nRespuesta borrador:\n{{ $('AI Agent').item.json.output.respuesta_sugerida }}\nPara aprobar y enviar este presupuesto:\n\nAPROBAR:\nhttps://lucianomellone.app.n8n.cloud/webhook-test/a6af9b27-62fb-465f-9b8e-a82babda4d01?accion=aprobar&id={{ $('Merge').item.json.id_consulta }}\n\nRECHAZAR:\nhttps://lucianomellone.app.n8n.cloud/webhook-test/a6af9b27-62fb-465f-9b8e-a82babda4d01?accion=rechazar&id={{ $('Merge').item.json.id_consulta }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "19e5b4ee-001d-4bf5-8271-496e5db6b165",
+      "name": "Send a message",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2448,
+        -80
+      ],
+      "webhookId": "b0c95e53-e3bd-4d08-953a-6315b3bf51d4",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ITlUkuS8DHHWSkyz",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "id": "88c8f7d8-827c-46c9-9d0a-29aca0007135",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        16,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ITlUkuS8DHHWSkyz",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "a6af9b27-62fb-465f-9b8e-a82babda4d01",
+        "options": {}
+      },
+      "id": "36da587b-f5a4-42be-b2e6-52f905ce3599",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        2672,
+        -16
+      ],
+      "webhookId": "a6af9b27-62fb-465f-9b8e-a82babda4d01"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b902368c-2094-41c9-8d1e-d9739f3f2259",
+              "leftValue": "={{ $json.query.accion }}",
+              "rightValue": "aprobar",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "fe87680a-1c5e-4a46-919d-dd2abe022392",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2896,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "28215a99-bf0c-4dac-bae2-f2c26119f1db",
+              "name": "gmail_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "ac32a9e4-dcf3-457d-b458-b09612515672",
+              "name": "cliente_email",
+              "value": "={{ $json.from.value[0].address }}",
+              "type": "string"
+            },
+            {
+              "id": "793ecaf6-5ef0-477b-9df1-3abd420e3c95",
+              "name": "id_consulta",
+              "value": "={{ 'CONS-' + $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "09404afe-73b3-422e-b954-27c3c861a885",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "c8eb24e0-8a0b-41ba-8d99-ddd9c302553b",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        736,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields.Email }}",
+        "subject": "={{ $('Search records2').item.json.fields['Tipo de Evento'] }}",
+        "message": "={{ $('Search records2').item.json.fields['Respuesta sugerida'].replace('Para aprobar y enviar este presupuesto, hacé clic en el siguiente enlace de confirmación o actualizá el estado en Airtable.', '').trim() }} \nSaludos,\nSabores Catering",
+        "options": {}
+      },
+      "id": "edbef6bc-2c40-4595-be02-7fd8d887bab0",
+      "name": "Send a message1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        3520,
+        -128
+      ],
+      "webhookId": "4c382c0e-a085-4ac4-bfb1-5f16cb9bae60",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ITlUkuS8DHHWSkyz",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblorC8UU5SCTIm8z",
+          "mode": "list",
+          "cachedResultName": "Consultas",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblorC8UU5SCTIm8z"
+        },
+        "filterByFormula": "={ID Consulta} = \"{{ $json.query.id }}\"",
+        "options": {}
+      },
+      "id": "ff2b9533-4f69-454f-9d57-a53e12d24ed5",
+      "name": "Search records2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        3120,
+        -128
+      ],
+      "alwaysOutputData": false,
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblokqozwCNf2XP5d",
+          "mode": "list",
+          "cachedResultName": "Clientes",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblokqozwCNf2XP5d"
+        },
+        "filterByFormula": "=RECORD_ID() = '{{ $json.fields.Cliente[0] }}'",
+        "options": {}
+      },
+      "id": "5eb61b4a-ff9c-42cb-8d8f-78136a1c4d1e",
+      "name": "Search records3",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        3328,
+        -128
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblorC8UU5SCTIm8z",
+          "mode": "list",
+          "cachedResultName": "Consultas",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblorC8UU5SCTIm8z"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID Consulta": "={{ $json.query.id }}",
+            "Estado": "Rechazado"
+          },
+          "matchingColumns": [
+            "ID Consulta"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ID Consulta",
+              "displayName": "ID Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mensaje",
+              "displayName": "Mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de Consulta",
+              "displayName": "Fecha de Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Procesado por IA",
+                  "value": "Procesado por IA"
+                },
+                {
+                  "name": "Pendiente de Aprobación",
+                  "value": "Pendiente de Aprobación"
+                },
+                {
+                  "name": "Aprobado",
+                  "value": "Aprobado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                },
+                {
+                  "name": "Enviado",
+                  "value": "Enviado"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Evento",
+              "displayName": "Tipo de Evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Cumpleaños",
+                  "value": "Cumpleaños"
+                },
+                {
+                  "name": "Evento corporativo",
+                  "value": "Evento corporativo"
+                },
+                {
+                  "name": "Casamiento",
+                  "value": "Casamiento"
+                },
+                {
+                  "name": "Evento familiar",
+                  "value": "Evento familiar"
+                },
+                {
+                  "name": "Evento Infantil",
+                  "value": "Evento Infantil"
+                },
+                {
+                  "name": "Otro",
+                  "value": "Otro"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cantidad de Invitados",
+              "displayName": "Cantidad de Invitados",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha del evento",
+              "displayName": "Fecha del evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Restricciones alimentarias",
+              "displayName": "Restricciones alimentarias",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prioridad IA",
+              "displayName": "Prioridad IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alta",
+                  "value": "Alta"
+                },
+                {
+                  "name": "Media",
+                  "value": "Media"
+                },
+                {
+                  "name": "Baja",
+                  "value": "Baja"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nivel de Interés",
+              "displayName": "Nivel de Interés",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alto",
+                  "value": "Alto"
+                },
+                {
+                  "name": "Medio",
+                  "value": "Medio"
+                },
+                {
+                  "name": "Bajo",
+                  "value": "Bajo"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resumen IA",
+              "displayName": "Resumen IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Datos faltantes",
+              "displayName": "Datos faltantes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Respuesta sugerida",
+              "displayName": "Respuesta sugerida",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Error",
+              "displayName": "Error",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de procesamiento",
+              "displayName": "Fecha de procesamiento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de envio",
+              "displayName": "Fecha de envio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Servicio solicitado",
+              "displayName": "Servicio solicitado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f47b5574-703c-45b5-bc2a-f508d5ed1fde",
+      "name": "Update record",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        3056,
+        80
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblorC8UU5SCTIm8z",
+          "mode": "list",
+          "cachedResultName": "Consultas",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblorC8UU5SCTIm8z"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID Consulta": "={{ $('Search records2').item.json.fields['ID Consulta'] }}",
+            "Estado": "Aprobado"
+          },
+          "matchingColumns": [
+            "ID Consulta"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ID Consulta",
+              "displayName": "ID Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mensaje",
+              "displayName": "Mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de Consulta",
+              "displayName": "Fecha de Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Procesado por IA",
+                  "value": "Procesado por IA"
+                },
+                {
+                  "name": "Pendiente de Aprobación",
+                  "value": "Pendiente de Aprobación"
+                },
+                {
+                  "name": "Aprobado",
+                  "value": "Aprobado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                },
+                {
+                  "name": "Enviado",
+                  "value": "Enviado"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Evento",
+              "displayName": "Tipo de Evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Cumpleaños",
+                  "value": "Cumpleaños"
+                },
+                {
+                  "name": "Evento corporativo",
+                  "value": "Evento corporativo"
+                },
+                {
+                  "name": "Casamiento",
+                  "value": "Casamiento"
+                },
+                {
+                  "name": "Evento familiar",
+                  "value": "Evento familiar"
+                },
+                {
+                  "name": "Evento Infantil",
+                  "value": "Evento Infantil"
+                },
+                {
+                  "name": "Otro",
+                  "value": "Otro"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cantidad de Invitados",
+              "displayName": "Cantidad de Invitados",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha del evento",
+              "displayName": "Fecha del evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Restricciones alimentarias",
+              "displayName": "Restricciones alimentarias",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prioridad IA",
+              "displayName": "Prioridad IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alta",
+                  "value": "Alta"
+                },
+                {
+                  "name": "Media",
+                  "value": "Media"
+                },
+                {
+                  "name": "Baja",
+                  "value": "Baja"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nivel de Interés",
+              "displayName": "Nivel de Interés",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alto",
+                  "value": "Alto"
+                },
+                {
+                  "name": "Medio",
+                  "value": "Medio"
+                },
+                {
+                  "name": "Bajo",
+                  "value": "Bajo"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resumen IA",
+              "displayName": "Resumen IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Datos faltantes",
+              "displayName": "Datos faltantes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Respuesta sugerida",
+              "displayName": "Respuesta sugerida",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Error",
+              "displayName": "Error",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de procesamiento",
+              "displayName": "Fecha de procesamiento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de envio",
+              "displayName": "Fecha de envio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Servicio solicitado",
+              "displayName": "Servicio solicitado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "724b05d4-cf71-444e-a26d-1fdbe4256779",
+      "name": "Update record1",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        3744,
+        -128
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "77a49498-fd18-4304-93e7-245496f94662",
+              "leftValue": "={{ $('AI Agent').item.json.output.datos_faltantes }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "array",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b4bcae1e-ce0b-45b6-b2c4-42267753da0b",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2256,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "airtableOAuth2Api",
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app91JknHff3ig2wJ",
+          "mode": "list",
+          "cachedResultName": "Untitled Base",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblorC8UU5SCTIm8z",
+          "mode": "list",
+          "cachedResultName": "Consultas",
+          "cachedResultUrl": "https://airtable.com/app91JknHff3ig2wJ/tblorC8UU5SCTIm8z"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID Consulta": "={{ $('Create a record1').item.json.fields['ID Consulta'] }}",
+            "Estado": "Error",
+            "Datos faltantes": "={{ $('AI Agent').item.json.output.datos_faltantes.join(', ') }}"
+          },
+          "matchingColumns": [
+            "ID Consulta"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "ID Consulta",
+              "displayName": "ID Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cliente",
+              "displayName": "Cliente",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mensaje",
+              "displayName": "Mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de Consulta",
+              "displayName": "Fecha de Consulta",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Pendiente",
+                  "value": "Pendiente"
+                },
+                {
+                  "name": "Procesado por IA",
+                  "value": "Procesado por IA"
+                },
+                {
+                  "name": "Pendiente de Aprobación",
+                  "value": "Pendiente de Aprobación"
+                },
+                {
+                  "name": "Aprobado",
+                  "value": "Aprobado"
+                },
+                {
+                  "name": "Rechazado",
+                  "value": "Rechazado"
+                },
+                {
+                  "name": "Enviado",
+                  "value": "Enviado"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Tipo de Evento",
+              "displayName": "Tipo de Evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Cumpleaños",
+                  "value": "Cumpleaños"
+                },
+                {
+                  "name": "Evento corporativo",
+                  "value": "Evento corporativo"
+                },
+                {
+                  "name": "Casamiento",
+                  "value": "Casamiento"
+                },
+                {
+                  "name": "Evento familiar",
+                  "value": "Evento familiar"
+                },
+                {
+                  "name": "Evento Infantil",
+                  "value": "Evento Infantil"
+                },
+                {
+                  "name": "Otro",
+                  "value": "Otro"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Cantidad de Invitados",
+              "displayName": "Cantidad de Invitados",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha del evento",
+              "displayName": "Fecha del evento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Restricciones alimentarias",
+              "displayName": "Restricciones alimentarias",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Prioridad IA",
+              "displayName": "Prioridad IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alta",
+                  "value": "Alta"
+                },
+                {
+                  "name": "Media",
+                  "value": "Media"
+                },
+                {
+                  "name": "Baja",
+                  "value": "Baja"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nivel de Interés",
+              "displayName": "Nivel de Interés",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Alto",
+                  "value": "Alto"
+                },
+                {
+                  "name": "Medio",
+                  "value": "Medio"
+                },
+                {
+                  "name": "Bajo",
+                  "value": "Bajo"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resumen IA",
+              "displayName": "Resumen IA",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Datos faltantes",
+              "displayName": "Datos faltantes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Respuesta sugerida",
+              "displayName": "Respuesta sugerida",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Error",
+              "displayName": "Error",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de procesamiento",
+              "displayName": "Fecha de procesamiento",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Fecha de envio",
+              "displayName": "Fecha de envio",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Servicio solicitado",
+              "displayName": "Servicio solicitado",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "3379b6e9-a93d-4b3b-91b5-41ae4695053c",
+      "name": "Update record2",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.2,
+      "position": [
+        2448,
+        96
+      ],
+      "credentials": {
+        "airtableOAuth2Api": {
+          "id": "1e6mNIr0VyRMDgVX",
+          "name": "Airtable account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Sos un asistente virtual experto para un negocio de Catering. Tu tarea es analizar la consulta del cliente y armar un presupuesto sugerido usando únicamente la lista de servicios disponibles.\n\nConsulta del cliente:\n{{ $('Gmail Trigger').item.json.text }}\n\nServicios disponibles en la empresa:\n{{ JSON.stringify($('Search records1').all()) }}\n\nAnalizá la consulta e identificá:\n\n- tipo de evento\n- cantidad de invitados\n- fecha del evento\n- servicio solicitado o servicio más adecuado\n- posibles restricciones alimentarias\n- nivel de interés del cliente\n- prioridad de la consulta\n- datos faltantes\n\nREGLAS PARA \"datos_faltantes\":\n\nConsiderá como datos OBLIGATORIOS únicamente:\n1. Tipo de evento\n2. Cantidad de invitados\n3. Fecha del evento\n4. Servicio solicitado o un servicio que pueda recomendarse según la consulta\n\nSi alguno de esos datos obligatorios no aparece en el mensaje del cliente y no puede determinarse razonablemente, agregalo a \"datos_faltantes\".\n\nIMPORTANTE:\n- La ubicación del evento NO es un dato obligatorio.\n- El horario de inicio NO es un dato obligatorio.\n- Las restricciones alimentarias NO son obligatorias para poder elaborar el presupuesto. Si no se mencionan, no las marques como faltantes.\n- No inventes información que el cliente no haya proporcionado.\n- Si están presentes todos los datos obligatorios, \"datos_faltantes\" DEBE ser exactamente una lista vacía: [].\n- Si faltan varios datos, incluí todos ellos como elementos de la lista.\n- \"datos_faltantes\" siempre debe ser un array/lista de textos.\n\nRedactá también una respuesta cordial y profesional.\n\nLa respuesta_sugerida es únicamente para enviar al cliente.\nNO debe incluir enlaces de aprobación, rechazo, URLs, instrucciones internas ni mencionar el proceso de aprobación.\nLa aprobación se gestionará posteriormente mediante otro flujo de n8n.\n\nDevuelve toda la información respetando estrictamente el JSON schema configurado.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1664,
+        -16
+      ],
+      "id": "5ca80dfb-128e-41e5-86ee-e6c459f3a194",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        1664,
+        208
+      ],
+      "id": "265f74fe-01e1-4dd0-8bac-cf162c65e170",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Jc19n4lg7gueHwP9",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Search records1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Search records1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Search records2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records2": {
+      "main": [
+        [
+          {
+            "node": "Search records3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records3": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Update record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update record2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "msLqgjGrnvOfw4FN",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "e6687914-dd7e-477e-8b18-55222727eb21",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "11cb8a256dd493c581e880352c869033c3e552822fd21fa4fc85e1042d6ec967"
+  },
+  "nodeGroups": [],
+  "id": "C6mXtxqF1Yx47bXF",
+  "tags": []
+}
